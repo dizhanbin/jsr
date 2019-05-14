@@ -25,6 +25,24 @@ json parse
 
 bean to json string
 
+Read value by field
+Set  value via field
+
+sqlite operations insert query update delete。
+
+Plugins
+
+Template invoked via groovy
+
+In the iedata/jsr directory, we can see the template.
+
+
+These template files can be modified to suit your project.
+
+
+Two auxiliary class files jsr sqlo
+
+
 
 
 
