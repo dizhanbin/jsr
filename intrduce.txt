@@ -1,0 +1,1 @@
+Hello everyone, today I will introduce you to a flutter development plugin. Developers can easily use the launch mechanism for json and sqlite operations.
