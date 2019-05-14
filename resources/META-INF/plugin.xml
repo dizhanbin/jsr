@@ -1,0 +1,79 @@
+<idea-plugin>
+  <id>com.your.company.unique.plugin.id</id>
+  <name>jsr</name>
+  <version>1.0</version>
+  <vendor email="dizhanbin@hotmail.com" url="">lrl</vendor>
+
+
+  <description><![CDATA[
+
+
+      <p>Flutter auxiliary development plugin.</p>
+      <p>
+        <a href="https://github.com/dizhanbin/jsr">jsr github</a> &nbsp & &nbsp
+      </p>
+
+
+    ]]></description>
+
+  <change-notes>
+    <![CDATA[
+
+<b> &nbsp;1.0</b>
+<ul>
+    <li>Activity, business visualization management</li>
+    <li>Complex business visualization, reducing ifelse in code</li>
+    <li>UI and business integration</li>
+    <li>Generate code configurable, templated</li>
+</ul>
+
+
+    ]]></change-notes>
+
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="173.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+  <depends>com.intellij.modules.lang</depends>
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.xml</depends>
+  <depends>Dart</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+
+
+
+    <ApplicationLoadListener implementation="org.ifelse2.IEAppLoader" id="IEAppLoader" />
+
+
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <group id="ifelse_menu" text="ifelse"  popup="true" description="ifelse menu" icon="/icons/logo.png" >
+
+      <separator />
+
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="first" />
+
+      <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+
+
+      <action class="org.ifelse2.dart.jsr.action.ActionBind"  id="org.ifelse2.dart.jsr.action.ActionBind" description="add to class" text="add to class"  popup="true"     />
+      <action class="org.ifelse2.dart.jsr.action.ActionBindAll"  id="org.ifelse2.dart.jsr.action.ActionBindAll" description="refresh all class" text="refresh all class"  popup="true"     />
+
+      <separator  />
+
+
+    </group>
+
+
+  </actions>
+
+</idea-plugin>
