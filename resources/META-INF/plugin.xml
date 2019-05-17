@@ -1,16 +1,20 @@
 <idea-plugin>
-  <id>com.your.company.unique.plugin.id</id>
+  <id>org.ifelse2.dart.jsr</id>
   <name>jsr</name>
   <version>1.0</version>
-  <vendor email="dizhanbin@hotmail.com" url="">lrl</vendor>
+  <vendor email="dizhanbin@hotmail.com" url="">dizhanbin</vendor>
 
 
   <description><![CDATA[
 
 
       <p>Flutter auxiliary development plugin.</p>
+      <p></p>
+      <p ><font color="#0000ff"> Model model = Class.fromJson(Model,jsonstr);</font></p>
+      <p ><font color="#0000ff"> SQLO.insert(model);</font></p>
+      <p></p>
       <p>
-        <a href="https://github.com/dizhanbin/jsr">jsr github</a> &nbsp & &nbsp
+        <a href="https://github.com/dizhanbin/jsr">jsr github</a>
       </p>
 
 
@@ -19,11 +23,10 @@
   <change-notes>
     <![CDATA[
 
-<b> &nbsp;1.0</b>
+<b>1.0</b>
 <ul>
-    <li>Activity, business visualization management</li>
-    <li>Complex business visualization, reducing ifelse in code</li>
-    <li>UI and business integration</li>
+    <li>Json Sqlite reflect operation.</li>
+
     <li>Generate code configurable, templated</li>
 </ul>
 

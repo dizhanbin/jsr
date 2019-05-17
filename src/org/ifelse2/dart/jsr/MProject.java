@@ -1,5 +1,6 @@
 package org.ifelse2.dart.jsr;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class MProject {
     public void printAll(String sep) {
 
 
+        if( files != null )
         for(String f:files){
 
             Log.i("%s%s",sep,f);

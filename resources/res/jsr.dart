@@ -1,4 +1,4 @@
-import 'jsr/Class.dart';
+import 'Class.dart';
 
 const Object jsr = _jsr();
 

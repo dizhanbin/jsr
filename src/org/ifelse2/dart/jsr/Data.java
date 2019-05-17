@@ -73,10 +73,16 @@ public class Data {
 
         String jsrpath = getDataPath(project);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        MProject mProject = IEAppLoader.getMProject(project);
+        MProject mProject = IEAppLoader.getMProjectorCreate(project);
         String jsonstr = gson.toJson(mProject);
 
         try {
+
+            File file = new File(jsrpath);
+            if( !file.exists() )
+                file.getParentFile().mkdirs();
+
+
             DataOutputStream dis = new DataOutputStream(new FileOutputStream(jsrpath));
             IOUtil.writeUTF(dis, jsonstr);
             VirtualFile vf = VirtualFileManager.getInstance().refreshAndFindFileByUrl("file://" + jsrpath);
@@ -132,6 +138,8 @@ public class Data {
             Data.refreshFile(project);
             VirtualFileManager.getInstance().syncRefresh();
 
+            Log.i(" [√] file:%s", mFile.filepath);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -140,18 +148,20 @@ public class Data {
 
     public static void onFileChanged(Project project) {
 
+        Log.i("");
         MProject mProject = IEAppLoader.getMProject(project);
 
         try {
             for (String filepath : mProject.getFiles()) {
 
                 MFile mFile = MFile.fromDartFile(project,project.getBasePath() + filepath);
-
                 GroovyUtil.run(project, "onDartChanged", mFile);
 
+                Log.i(" [√] file:%s", mFile.filepath);
 
             }
             Data.refreshFile(project);
+
 
             VirtualFileManager.getInstance().syncRefresh();
 
@@ -159,5 +169,10 @@ public class Data {
             e.printStackTrace();
         }
 
+    }
+
+    public static boolean isJsrProject(Project project) {
+
+        return new File(getDataPath(project)).exists();
     }
 }

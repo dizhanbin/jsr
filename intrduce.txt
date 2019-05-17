@@ -1,53 +1,21 @@
-Hello everyone,I'm 17f. Today I will introduce you a flutter development plugin.
+Hello I'm 17f. Today I will introduce a flutter development plugin to you.
 Developers can easily use the reflection for json and sqlite operations.
-
-We open Android studio in the plugin management search for jsr installation restart.
-
-
+We open Android studio, search for jsr installation and restart in the plugin management.
 We create two new class files MClass.dart MStudent.dart
-
-the dart bean inheritance from jsrR
-
-
-After the file is built, we right click on the pop-up menu and select ifelse add to class
-
+the dart bean inheritance from JsrR
+After the file is built, we right click on the pop menu and select ifelse add to class
 Ok, we can see that several class files are generated in the lib/jsr folder.
-
 Next, let's do some testing.
-
 Add sqflite library to the pubspec.yaml to add support for sqlite
-
 We create a new test file test_reflect.dart
-
 Import Class.dart
-
 json parse
-
 bean to json string
-
 Read value by field
 Set  value via field
-
 sqlite operations insert query update delete。
-
 Plugins
-
 Template invoked via groovy
-
 In the iedata/jsr directory, we can see the template.
-
-
 These template files can be modified to suit your project.
-
-
 Two auxiliary class files jsr sqlo
-
-
-
-
-
-
-
-
-
-

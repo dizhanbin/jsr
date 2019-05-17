@@ -1,6 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'jsr/Class.dart';
+import 'Class.dart';
 
 class SQLO {
   static Database database;
@@ -272,7 +272,7 @@ class SQLO {
     }
 
 
-    return database.update(tables, params, where:wherestr);
+    return database.update(tname, params, where:wherestr);
 
   }
 

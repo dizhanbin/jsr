@@ -4,16 +4,15 @@ import com.google.gson.Gson;
 import com.intellij.ide.ApplicationLoadListener;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.project.*;
+import com.intellij.openapi.project.ProjectUtil;
 import com.intellij.openapi.vfs.VirtualFileEvent;
 import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import org.ifelse2.dart.jsr.Data;
-import org.ifelse2.dart.jsr.Log;
-import org.ifelse2.dart.jsr.MFile;
-import org.ifelse2.dart.jsr.MProject;
+import org.ifelse2.dart.jsr.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.DataInputStream;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +27,24 @@ public class IEAppLoader implements ApplicationLoadListener {
 
     }
 
+    public static MProject getMProjectorCreate(Project project) {
+
+        if( !mprojects.containsKey(project.getName()) ){
+
+            MProject    mProject = new MProject();
+            mprojects.put(project.getName(), mProject);
+            initProject(project);
+
+            return mProject;
+
+        }else {
+
+            MProject mProject = mprojects.get(project.getName());
+
+            return mProject;
+        }
+    }
+
     @Override
     public void beforeApplicationLoaded(@NotNull Application application, @NotNull String configPath) {
 
@@ -40,14 +57,14 @@ public class IEAppLoader implements ApplicationLoadListener {
 
                 if( !mprojects.containsKey(project.getName()) ){
 
-                    MProject mProject = Data.read(project);
-                    if( mProject == null )
-                        mProject = new MProject();
-                    mprojects.put(project.getName(),mProject);
+                    if( Data.isJsrProject(project) ) {
 
-
-                    Log.i("file://%s",Data.getDataPath(project));
-                    mProject.printAll("     ");
+                        MProject mProject = Data.read(project);
+                        Log.i("file://%s", Data.getDataPath(project));
+                        mProject.printAll("     ");
+                        mprojects.put(project.getName(),mProject);
+                        //initProject(project);
+                    }
 
 
                 }
@@ -69,16 +86,20 @@ public class IEAppLoader implements ApplicationLoadListener {
                             return;
                         }
 
-                        Project project = ProjectUtil.guessProjectForFile(event.getFile());
+                        if( Data.isJsrProject(project) ) {
 
-                        String basepath = project.getBasePath();
+                            Project project = ProjectUtil.guessProjectForFile(event.getFile());
 
-                        MProject mProject = mprojects.get(project.getName());
+                            String basepath = project.getBasePath();
 
-                        if( mProject.indexOf(filepath.replace(basepath,"")) > -1 ){
+                            MProject mProject = mprojects.get(project.getName());
 
-                            Log.i("dart bean changed:%s",filepath);
-                            Data.onFileChanged(project,filepath);
+                            if (mProject.indexOf(filepath.replace(basepath, "")) > -1) {
+
+                                Log.i("file://%s", filepath);
+                                Data.onFileChanged(project, filepath);
+
+                            }
 
                         }
 
@@ -103,6 +124,38 @@ public class IEAppLoader implements ApplicationLoadListener {
 
 
         });
+
+
+
+    }
+
+    private static void initProject(Project project) {
+
+        String basepath = project.getBasePath();
+
+
+        String path = basepath+"/iedata/jsr/dart_class.tpl";
+        if( !new File(path).exists())
+        FileUtil.copyFromRes("/res/dart_class.tpl",path);
+
+        path = basepath+"/iedata/jsr/dart_class_factory.tpl";
+        if( !new File(path).exists())
+        FileUtil.copyFromRes("/res/dart_class_factory.tpl",path);
+
+        path = basepath+"/iedata/jsr/R.groovy";
+        if( !new File(path).exists())
+        FileUtil.copyFromRes("/res/R.groovy",path);
+
+        path = basepath+"/lib/jsr/jsr.dart";
+        if( !new File(path).exists())
+        FileUtil.copyFromRes("/res/jsr.dart",path);
+
+        path = basepath+"/lib/jsr/sqlo.dart";
+        if( !new File(path).exists())
+        FileUtil.copyFromRes("/res/sqlo.dart",path);
+
+
+
 
 
 

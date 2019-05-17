@@ -8,6 +8,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.lang.dart.psi.*;
+import com.jetbrains.lang.dart.psi.impl.DartSuperclassImpl;
 import com.jetbrains.lang.dart.psi.impl.DartVarDeclarationListImpl;
 
 import java.util.ArrayList;
@@ -55,6 +56,13 @@ public class MFile {
 
             MClass mClass = new MClass();
 
+            //DartTypeParameters typeparams = ;
+
+            DartSuperclass dtps   = dartClass.getSuperclass();
+
+            //Log.i("mfile darttype:%s :%s  name:%s type:%s",dtps,dtps.getText(),dtps.getName() ,dtps.getType().getText());
+
+
             mClass.name = dartClass.getComponentName().getText();
 
             if (dartClass.getFirstChild() instanceof DartMetadata) {
@@ -69,6 +77,7 @@ public class MFile {
 
             }
             mClass.fields = new ArrayList<>();
+
 
             List<DartComponent> fields = dartClass.getFields();
             for (DartComponent dc : fields) {
